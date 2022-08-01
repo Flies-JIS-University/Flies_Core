@@ -1,5 +1,5 @@
 project "core"
-    kind "SharedLib"
+    kind "StaticLib"
 
     language "C++"
     files { "src/**.h", "src/**.cpp" }

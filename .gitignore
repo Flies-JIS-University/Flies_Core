@@ -1,2 +1,5 @@
 build
 **/Makefile
+*.sln
+*.vcxproj*
+.vs

@@ -1,5 +1,5 @@
 project "asio"
-    kind "SharedLib"
+    kind "StaticLib"
     cppdialect "C++20"
     language "C++"
     files { "asio/asio/src/asio.cpp", "asio/asio/src/asio_ssl.cpp" }
@@ -15,3 +15,6 @@ project "asio"
         "%{wks.location}/vendor/asio/asio/include"
     }
 
+    filter "system:Windows"
+        includedirs { "C:\\Program Files\\OpenSSL-Win64\\include" }
+    filter {}

@@ -1,4 +1,4 @@
-#include <iostream>
+﻿#include <iostream>
 
 
 #include <lib.h>
@@ -30,15 +30,22 @@ awaitable<void> echo(tcp::socket socket)
 {
   try
   {
-    char data[1024];
     for (;;)
     {
+      char data[1024];
       std::size_t n = co_await socket.async_read_some(asio::buffer(data), use_awaitable);
+      data[n] = '\0';
+      std::string msg =  data;
+      std::string s = socket.remote_endpoint().address().to_string();
+      std::cout << "[recv from (" << s << ':' << socket.remote_endpoint().port() << ")] " 
+          << msg << std::endl;
+
       co_await async_write(socket, asio::buffer(data, n), use_awaitable);
     }
   }
   catch (std::exception& e)
   {
+      // connection close
     std::printf("echo Exception: %s\n", e.what());
   }
 }
@@ -50,6 +57,9 @@ awaitable<void> listener()
   for (;;)
   {
     tcp::socket socket = co_await acceptor.async_accept(use_awaitable);
+    std::string s = socket.remote_endpoint().address().to_string();
+    std::cout << "[connected] " << s << std::endl;
+     
     co_spawn(executor, echo(std::move(socket)), detached);
   }
 }
@@ -58,6 +68,9 @@ int main()
 {
   try
   {
+      std::cout << "❤️❤️" << std::endl;
+
+      std::printf("🌟😃😇🌏🎮\n");
     asio::io_context io_context(1);
 
     asio::signal_set signals(io_context, SIGINT, SIGTERM);

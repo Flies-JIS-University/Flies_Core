@@ -1,4 +1,4 @@
-project "sanbox"
+project "sandbox"
     language "C++"
     files { "src/**.h", "src/**.cpp"}
     kind "ConsoleApp"
@@ -11,4 +11,13 @@ project "sanbox"
         "%{wks.location}/vendor/asio/asio/include"
     }
 
-    links { "core", "asio", "ssl", "crypto" }
+    links { "core", "asio"  }
+
+    filter "system:Windows"
+
+    filter "system:Unix"
+        links { "ssl", "crypto" }
+
+    filter "system:Mac"
+
+    filter {}

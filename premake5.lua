@@ -9,6 +9,15 @@ workspace "Flies_Core"
         "Dist"
     }
 
+--     filter "system:Windows"
+--     system "windows"
+
+--  filter "system:Unix"
+--     system "linux"
+
+--  filter "system:Mac"
+--     system "macosx"
+
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
 
