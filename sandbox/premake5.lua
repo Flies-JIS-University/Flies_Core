@@ -14,6 +14,11 @@ project "sandbox"
     links { "core", "asio"  }
 
     filter "system:Windows"
+        includedirs { "C:\\Program Files\\OpenSSL-Win64\\include" }
+        libdirs { "C:\\Program Files\\OpenSSL-Win64\\lib" }
+        links { "libssl", "libcrypto" }
+
+    filter {}
 
     filter "system:Unix"
         links { "ssl", "crypto" }
